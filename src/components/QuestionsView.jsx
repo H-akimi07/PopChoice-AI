@@ -89,14 +89,14 @@ I want something ${mood}.
       {/*           AMBIENT BACKGROUND
        */}
 
-      <div className="pointer-events-none absolute left-[-180px] top-[-180px] h-[500px] w-[500px] rounded-full bg-purple-600/10 blur-[120px]" />
+      <div className="pointer-events-none absolute left-45 top-45 h-125 w-125 rounded-full bg-purple-600/10 blur-[120px]" />
 
-      <div className="pointer-events-none absolute bottom-[-220px] right-[-150px] h-[550px] w-[550px] rounded-full bg-fuchsia-500/10 blur-[130px]" />
+      <div className="pointer-events-none absolute bottom-55 right-37.5 h-137.5 w-137.5 rounded-full bg-fuchsia-500/10 blur-[130px]" />
 
-      <div className="pointer-events-none absolute left-1/2 top-1/3 h-[400px] w-[400px] -translate-x-1/2 rounded-full bg-violet-500/[0.04] blur-[100px]" />
+      <div className="pointer-events-none absolute left-1/2 top-1/3 h-100 w-100 -translate-x-1/2 rounded-full bg-violet-500/4 blur-[100px]" />
 
       {/* Film grain */}
-      <div className="pointer-events-none absolute inset-0 opacity-[0.025] [background-image:radial-gradient(rgba(255,255,255,0.8)_1px,transparent_1px)] [background-size:4px_4px]" />
+      <div className="pointer-events-none absolute inset-0 opacity-[0.025] bg-radial-gradient(rgba(255,255,255,0.8)_1px,transparent_1px)] bg-size:4px_4px]" />
 
       {screen === "loading" && <LoadingState />}
 
@@ -106,10 +106,8 @@ I want something ${mood}.
            */}
 
           <div className="mb-16 flex items-center justify-center gap-3 sm:mb-20">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/[0.06] shadow-lg shadow-purple-500/10">
-              <span className="translate-x-[1px] text-sm text-purple-300">
-                ▶
-              </span>
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/6 shadow-lg shadow-purple-500/10">
+              <span className="translate-x-1px text-sm text-purple-300">▶</span>
             </div>
 
             <span className="text-lg font-bold tracking-[-0.02em] text-white">
@@ -133,9 +131,9 @@ I want something ${mood}.
               <span className="h-px w-8 bg-purple-400/30 sm:w-12" />
             </div>
 
-            <h1 className="text-4xl font-extrabold leading-[1.03] tracking-[-0.05em] sm:text-5xl md:text-6xl lg:text-7xl">
+            <h1 className="text-4xl font-extrabold leading-[1.03] tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl">
               Find a movie
-              <span className="block bg-gradient-to-r from-purple-300 via-violet-400 to-fuchsia-300 bg-clip-text text-transparent">
+              <span className="block bg-linear-to-r from-purple-300 via-violet-400 to-fuchsia-300 bg-clip-text text-transparent">
                 made for you.
               </span>
             </h1>
@@ -156,13 +154,12 @@ I want something ${mood}.
               <span className="text-purple-300">01 / 04</span>
             </div>
 
-            <div className="h-[3px] overflow-hidden rounded-full bg-white/[0.07]">
-              <div className="h-full w-1/4 rounded-full bg-gradient-to-r from-purple-500 to-fuchsia-400 shadow-lg shadow-purple-500/30" />
+            <div className="h-0.75 overflow-hidden rounded-full bg-white/[0.07]">
+              <div className="h-full w-1/4 rounded-full bg-linear-to-r from-purple-500 to-fuchsia-400 shadow-lg shadow-purple-500/30" />
             </div>
           </div>
 
-          {/*               ERROR
-           */}
+          {/*    ERROR   */}
 
           {error && (
             <div className="mx-auto mt-6 flex max-w-3xl items-center gap-3 rounded-2xl border border-red-400/20 bg-red-500/[0.07] px-5 py-4 text-sm text-red-200">
@@ -174,12 +171,11 @@ I want something ${mood}.
             </div>
           )}
 
-          {/*               QUESTION 1
-           */}
+          {/*               QUESTION 1           */}
 
-          <div className="group mx-auto mt-8 max-w-3xl rounded-[22px] border border-white/[0.08] bg-white/[0.035] p-6 backdrop-blur-xl transition-all duration-300 hover:border-purple-300/20 hover:bg-white/[0.05] sm:p-8">
+          <div className="group mx-auto mt-8 max-w-3xl rounded-[22px] border border-white/8 bg-white/[0.035] p-6 backdrop-blur-xl transition-all duration-300 hover:border-purple-300/20 hover:bg-white/5 sm:p-8">
             <div className="flex gap-5">
-              <div className="hidden h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-purple-400/20 bg-purple-400/[0.08] text-[10px] font-bold tracking-wider text-purple-300 sm:flex">
+              <div className="hidden h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-purple-400/20 bg-purple-400/8 text-[10px] font-bold tracking-wider text-purple-300 sm:flex">
                 01
               </div>
 
@@ -206,7 +202,7 @@ I want something ${mood}.
                     placeholder="e.g. Interstellar"
                     value={favoriteMovie}
                     onChange={(e) => setFavoriteMovie(e.target.value)}
-                    className="h-14 w-full rounded-xl border border-white/10 bg-black/20 pl-12 pr-4 text-sm text-white outline-none transition-all placeholder:text-zinc-600 focus:border-purple-400/50 focus:bg-purple-500/[0.03] focus:ring-4 focus:ring-purple-500/[0.06]"
+                    className="h-14 w-full rounded-xl border border-white/10 bg-black/20 pl-12 pr-4 text-sm text-white outline-none transition-all placeholder:text-zinc-600 focus:border-purple-400/50 focus:bg-purple-500/3 focus:ring-4 focus:ring-purple-500/6"
                   />
                 </div>
               </div>
@@ -216,9 +212,9 @@ I want something ${mood}.
           {/*               QUESTION 2
            */}
 
-          <div className="group mx-auto mt-4 max-w-3xl rounded-[22px] border border-white/[0.08] bg-white/[0.035] p-6 backdrop-blur-xl transition-all duration-300 hover:border-purple-300/20 hover:bg-white/[0.05] sm:p-8">
+          <div className="group mx-auto mt-4 max-w-3xl rounded-[22px] border border-white/8 bg-white/[0.035] p-6 backdrop-blur-xl transition-all duration-300 hover:border-purple-300/20 hover:bg-white/5 sm:p-8">
             <div className="flex gap-5">
-              <div className="hidden h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-purple-400/20 bg-purple-400/[0.08] text-[10px] font-bold tracking-wider text-purple-300 sm:flex">
+              <div className="hidden h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-purple-400/20 bg-purple-400/8 text-[10px] font-bold tracking-wider text-purple-300 sm:flex">
                 02
               </div>
 
@@ -241,7 +237,7 @@ I want something ${mood}.
                     placeholder="I love it because..."
                     value={reason}
                     onChange={(e) => setReason(e.target.value)}
-                    className="min-h-36 w-full resize-none rounded-xl border border-white/10 bg-black/20 px-4 py-4 pb-10 text-sm leading-6 text-white outline-none transition-all placeholder:text-zinc-600 focus:border-purple-400/50 focus:bg-purple-500/[0.03] focus:ring-4 focus:ring-purple-500/[0.06]"
+                    className="min-h-36 w-full resize-none rounded-xl border border-white/10 bg-black/20 px-4 py-4 pb-10 text-sm leading-6 text-white outline-none transition-all placeholder:text-zinc-600 focus:border-purple-400/50 focus:bg-purple-500/3 focus:ring-4 focus:ring-purple-500/6"
                   />
 
                   <span className="absolute bottom-3 right-4 text-[10px] text-zinc-600">
@@ -255,9 +251,9 @@ I want something ${mood}.
           {/*               QUESTION 3
            */}
 
-          <div className="group mx-auto mt-4 max-w-3xl rounded-[22px] border border-white/[0.08] bg-white/[0.035] p-6 backdrop-blur-xl transition-all duration-300 hover:border-purple-300/20 hover:bg-white/[0.05] sm:p-8">
+          <div className="group mx-auto mt-4 max-w-3xl rounded-[22px] border border-white/8 bg-white/[0.035] p-6 backdrop-blur-xl transition-all duration-300 hover:border-purple-300/20 hover:bg-white/5 sm:p-8">
             <div className="flex gap-5">
-              <div className="hidden h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-purple-400/20 bg-purple-400/[0.08] text-[10px] font-bold tracking-wider text-purple-300 sm:flex">
+              <div className="hidden h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-purple-400/20 bg-purple-400/8 text-[10px] font-bold tracking-wider text-purple-300 sm:flex">
                 03
               </div>
 
@@ -275,8 +271,8 @@ I want something ${mood}.
                   <label
                     className={`relative flex cursor-pointer items-center gap-4 rounded-2xl border p-4 transition-all duration-300 ${
                       movieType === "New"
-                        ? "border-purple-400/50 bg-purple-500/[0.10] shadow-lg shadow-purple-500/[0.08]"
-                        : "border-white/[0.08] bg-black/10 hover:border-white/15 hover:bg-white/[0.03]"
+                        ? "border-purple-400/50 bg-purple-500/10 shadow-lg shadow-purple-500/8"
+                        : "border-white/8 bg-black/10 hover:border-white/15 hover:bg-white/3"
                     }`}
                   >
                     <input
@@ -291,7 +287,7 @@ I want something ${mood}.
                       className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-lg transition-all ${
                         movieType === "New"
                           ? "bg-purple-500/20 text-purple-300"
-                          : "bg-white/[0.05] text-zinc-500"
+                          : "bg-white/5 text-zinc-500"
                       }`}
                     >
                       ✦
@@ -322,8 +318,8 @@ I want something ${mood}.
                   <label
                     className={`relative flex cursor-pointer items-center gap-4 rounded-2xl border p-4 transition-all duration-300 ${
                       movieType === "Classic"
-                        ? "border-purple-400/50 bg-purple-500/[0.10] shadow-lg shadow-purple-500/[0.08]"
-                        : "border-white/[0.08] bg-black/10 hover:border-white/15 hover:bg-white/[0.03]"
+                        ? "border-purple-400/50 bg-purple-500/10 shadow-lg shadow-purple-500/8"
+                        : "border-white/8 bg-black/10 hover:border-white/15 hover:bg-white/3"
                     }`}
                   >
                     <input
@@ -338,7 +334,7 @@ I want something ${mood}.
                       className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-lg transition-all ${
                         movieType === "Classic"
                           ? "bg-purple-500/20 text-purple-300"
-                          : "bg-white/[0.05] text-zinc-500"
+                          : "bg-white/5 text-zinc-500"
                       }`}
                     >
                       ◈
@@ -372,9 +368,9 @@ I want something ${mood}.
           {/*               QUESTION 4
            */}
 
-          <div className="group mx-auto mt-4 max-w-3xl rounded-[22px] border border-white/[0.08] bg-white/[0.035] p-6 backdrop-blur-xl transition-all duration-300 hover:border-purple-300/20 hover:bg-white/[0.05] sm:p-8">
+          <div className="group mx-auto mt-4 max-w-3xl rounded-[22px] border border-white/8 bg-white/[0.035] p-6 backdrop-blur-xl transition-all duration-300 hover:border-purple-300/20 hover:bg-white/5 sm:p-8">
             <div className="flex gap-5">
-              <div className="hidden h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-purple-400/20 bg-purple-400/[0.08] text-[10px] font-bold tracking-wider text-purple-300 sm:flex">
+              <div className="hidden h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-purple-400/20 bg-purple-400/8 text-[10px] font-bold tracking-wider text-purple-300 sm:flex">
                 04
               </div>
 
@@ -392,8 +388,8 @@ I want something ${mood}.
                   <label
                     className={`relative flex cursor-pointer items-center gap-4 rounded-2xl border p-4 transition-all duration-300 ${
                       mood === "Fun"
-                        ? "border-purple-400/50 bg-purple-500/[0.10] shadow-lg shadow-purple-500/[0.08]"
-                        : "border-white/[0.08] bg-black/10 hover:border-white/15 hover:bg-white/[0.03]"
+                        ? "border-purple-400/50 bg-purple-500/10 shadow-lg shadow-purple-500/8"
+                        : "border-white/8 bg-black/10 hover:border-white/15 hover:bg-white/5"
                     }`}
                   >
                     <input
@@ -408,7 +404,7 @@ I want something ${mood}.
                       className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-lg transition-all ${
                         mood === "Fun"
                           ? "bg-purple-500/20 text-purple-300"
-                          : "bg-white/[0.05] text-zinc-500"
+                          : "bg-white/5 text-zinc-500"
                       }`}
                     >
                       ☻
@@ -439,8 +435,8 @@ I want something ${mood}.
                   <label
                     className={`relative flex cursor-pointer items-center gap-4 rounded-2xl border p-4 transition-all duration-300 ${
                       mood === "Serious"
-                        ? "border-purple-400/50 bg-purple-500/[0.10] shadow-lg shadow-purple-500/[0.08]"
-                        : "border-white/[0.08] bg-black/10 hover:border-white/15 hover:bg-white/[0.03]"
+                        ? "border-purple-400/50 bg-purple-500/10 shadow-lg shadow-purple-500/8"
+                        : "border-white/8 bg-black/10 hover:border-white/15 hover:bg-white/5"
                     }`}
                   >
                     <input
@@ -455,7 +451,7 @@ I want something ${mood}.
                       className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-lg transition-all ${
                         mood === "Serious"
                           ? "bg-purple-500/20 text-purple-300"
-                          : "bg-white/[0.05] text-zinc-500"
+                          : "bg-white/5 text-zinc-500"
                       }`}
                     >
                       ◐
@@ -491,7 +487,7 @@ I want something ${mood}.
 
           <div className="mx-auto mt-8 max-w-3xl">
             <button
-              className="group relative flex h-16 w-full items-center justify-center gap-4 overflow-hidden rounded-2xl bg-gradient-to-r from-purple-600 via-violet-500 to-fuchsia-500 px-6 font-semibold text-white shadow-2xl shadow-purple-900/30 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-purple-500/20 active:translate-y-0"
+              className="group relative flex h-16 w-full items-center justify-center gap-4 overflow-hidden rounded-2xl bg-linear-to-r from-purple-600 via-violet-500 to-fuchsia-500 px-6 font-semibold text-white shadow-2xl shadow-purple-900/30 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-purple-500/20 active:translate-y-0"
               onClick={handleContinue}
             >
               <span className="text-purple-100 transition-transform duration-300 group-hover:rotate-12">
@@ -504,7 +500,7 @@ I want something ${mood}.
                 →
               </span>
 
-              <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+              <span className="pointer-events-none absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/10 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
             </button>
           </div>
 
