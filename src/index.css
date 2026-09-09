@@ -1,7 +1,26 @@
+@import "tailwindcss";
+
 html,
 body,
 #root {
   margin: 0;
   min-width: 320px;
   min-height: 100%;
+}
+
+@keyframes loadingProgress {
+  0% {
+    width: 20%;
+    opacity: 0.6;
+  }
+
+  50% {
+    width: 78%;
+    opacity: 1;
+  }
+
+  100% {
+    width: 90%;
+    opacity: 0.8;
+  }
 }
