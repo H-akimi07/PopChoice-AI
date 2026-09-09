@@ -1,11 +1,30 @@
-function ResultView({ aiResult, favoriteMovie, reason, movieType, mood }) {
+function ResultView({
+  recommendation,
+  favoriteMovie,
+  reason,
+  movieType,
+  mood,
+  onGoAgain,
+}) {
+  const { movie, explanation } = recommendation;
+
   return (
     <div className="ai-result">
       <h1>🎬 Your Recommendation</h1>
 
-      <pre className="result-box">{aiResult}</pre>
+      <div className="recommendation-card">
+        <h2>{movie.title}</h2>
 
-      <p>Based on your preferences, we think you'll enjoy this movie.</p>
+        <p className="release-year">{movie.release_year}</p>
+
+        <h3>About the Movie</h3>
+
+        <p>{movie.content}</p>
+
+        <h3>Why We Recommend It</h3>
+
+        <p>{explanation}</p>
+      </div>
 
       <hr />
 
@@ -26,6 +45,8 @@ function ResultView({ aiResult, favoriteMovie, reason, movieType, mood }) {
       <p>
         <strong>Mood:</strong> {mood}
       </p>
+
+      <button onClick={onGoAgain}>Go Again</button>
     </div>
   );
 }

@@ -1,6 +1,9 @@
 import { useState } from "react";
 import ResultView from "./ResultView";
 import LoadingState from "./LoadingState";
+import { createEmbedding } from "../utils/createEmbedding";
+import { searchMovies } from "../utils/searchMovies";
+import { generateExplanation } from "../utils/generateExplanation";
 import "./QuestionsView.css";
 
 function QuestionsView() {
@@ -8,81 +11,83 @@ function QuestionsView() {
   const [reason, setReason] = useState("");
   const [movieType, setMovieType] = useState("");
   const [mood, setMood] = useState("");
-  const [aiResult, setAiResult] = useState("");
+
   const [screen, setScreen] = useState("form");
-  // "form" | "loading" | "result"
+  const [recommendation, setRecommendation] = useState(null);
+  const [error, setError] = useState("");
 
   async function handleContinue() {
-    console.log("BTTON CLICKED");
+    console.log("🚨 Recommend button clicked");
+    if (!favoriteMovie.trim() || !reason.trim() || !movieType || !mood) {
+      setError("Please answer all questions before continuing.");
+      return;
+    }
+
+    setError("");
     setScreen("loading");
 
     try {
-      const result = await getRecommendation();
-      console.log("AI RESULT RECEIVED", result);
+      // 1. Build the user's preference profile
+      const preferenceProfile = `
+My favorite movie is ${favoriteMovie} because ${reason}.
 
-      setAiResult(result);
+I am looking for something ${movieType}.
+
+I want something ${mood}.
+`;
+
+      console.log("📝 Preference profile:", preferenceProfile);
+
+      // 2. Create embedding from user preferences
+      console.log("🧠 Creating user preference embedding...");
+
+      const userEmbedding = await createEmbedding(preferenceProfile);
+
+      console.log("✅ User embedding created:", userEmbedding.length);
+
+      // 3. Search Supabase using vector similarity
+      console.log("🔎 Searching movie database...");
+
+      const movies = await searchMovies(userEmbedding, 1);
+
+      const movie = movies[0];
+
+      console.log("🎬 Best matching movie:", movie);
+
+      // 4. Generate personalized AI explanation
+      console.log("🤖 Generating personalized explanation...");
+
+      const explanation = await generateExplanation(preferenceProfile, movie);
+
+      console.log("✅ Explanation generated");
+
+      // 5. Save recommendation
+      setRecommendation({
+        movie,
+        explanation,
+      });
+
+      // 6. Show result
       setScreen("result");
-
-      console.log("SCREEN SET TO RESULT");
     } catch (error) {
-      console.error("ERROR:", error);
+      console.error("❌ Recommendation pipeline failed:", error);
+
+      setError(
+        "Something went wrong while finding your movie. Please try again.",
+      );
+
       setScreen("form");
     }
   }
-  async function getRecommendation() {
-    const response = await fetch(
-      "https://openrouter.ai/api/v1/chat/completions",
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${import.meta.env.VITE_OPENROUTER_API_KEY}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          model: "openai/gpt-4o-mini",
-          messages: [
-            {
-              role: "user",
-              content: `
-You are an expert movie recommendation AI.
 
-Based on the user's preferences, recommend 3 movies.
-
-User Preferences:
-- Favorite Movie: ${favoriteMovie}
-- Reason: ${reason}
-- Movie Type: ${movieType}
-- Mood: ${mood}
-
-Requirements:
-- Recommend exactly 3 movies.
-- Do not recommend the user's favorite movie.
-- Choose movies that genuinely match their interests.
-- Explain each recommendation briefly.
-- Keep explanations short and engaging.
-
-Return EXACTLY in this format:
-
-🎬 Recommendation #1
-Movie: [Movie Name]
-Why: [Reason]
-
-🎬 Recommendation #2
-Movie: [Movie Name]
-Why: [Reason]
-
-🎬 Recommendation #3
-Movie: [Movie Name]
-Why: [Reason]
-`,
-            },
-          ],
-        }),
-      },
-    );
-
-    const data = await response.json();
-    return data.choices[0].message.content;
+  function handleGoAgain() {
+    setFavoriteMovie("");
+    setReason("");
+    setMovieType("");
+    setMood("");
+    setRecommendation(null);
+    setError("");
+    setScreen("form");
   }
 
   return (
@@ -97,8 +102,11 @@ Why: [Reason]
 
           <p>Answer a few questions and let AI recommend a movie.</p>
 
+          {error && <p className="error-message">{error}</p>}
+
           <div className="label">
             <label>What is your favorite movie?</label>
+
             <input
               type="text"
               value={favoriteMovie}
@@ -108,6 +116,7 @@ Why: [Reason]
 
           <div className="label">
             <label>Why do you like it?</label>
+
             <textarea
               value={reason}
               onChange={(e) => setReason(e.target.value)}
@@ -142,39 +151,44 @@ Why: [Reason]
             </div>
           </div>
 
-          <div className="options">
-            <label className={`chip ${mood === "Fun" ? "active" : ""}`}>
-              <input
-                type="radio"
-                value="Fun"
-                checked={mood === "Fun"}
-                onChange={(e) => setMood(e.target.value)}
-              />
-              😄 Fun
-            </label>
+          <div className="labels">
+            <h3>What kind of mood are you in?</h3>
 
-            <label className={`chip ${mood === "Serious" ? "active" : ""}`}>
-              <input
-                type="radio"
-                value="Serious"
-                checked={mood === "Serious"}
-                onChange={(e) => setMood(e.target.value)}
-              />
-              🧠 Serious
-            </label>
+            <div className="options">
+              <label className={`chip ${mood === "Fun" ? "active" : ""}`}>
+                <input
+                  type="radio"
+                  value="Fun"
+                  checked={mood === "Fun"}
+                  onChange={(e) => setMood(e.target.value)}
+                />
+                😄 Fun
+              </label>
+
+              <label className={`chip ${mood === "Serious" ? "active" : ""}`}>
+                <input
+                  type="radio"
+                  value="Serious"
+                  checked={mood === "Serious"}
+                  onChange={(e) => setMood(e.target.value)}
+                />
+                🧠 Serious
+              </label>
+            </div>
           </div>
 
-          <button onClick={handleContinue}>Continue</button>
+          <button onClick={handleContinue}>Recommend a Movie</button>
         </>
       )}
 
-      {screen === "result" && (
+      {screen === "result" && recommendation && (
         <ResultView
-          aiResult={aiResult}
+          recommendation={recommendation}
           favoriteMovie={favoriteMovie}
           reason={reason}
           movieType={movieType}
           mood={mood}
+          onGoAgain={handleGoAgain}
         />
       )}
     </div>
