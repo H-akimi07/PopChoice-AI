@@ -1,5 +1,10 @@
 # 🎬 PopChoice
 
+
+#Demo Link on Vercel
+https://popchoice-ai-taupe.vercel.app/
+
+
 ### AI-Powered Movie Recommendation App
 
 PopChoice is an AI-powered movie recommendation application that helps users discover movies based on their personal taste, preferences, and current mood.
