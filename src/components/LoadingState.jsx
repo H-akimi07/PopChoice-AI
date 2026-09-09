@@ -1,37 +1,71 @@
 function LoadingState() {
   return (
-    <div className="loading-screen">
-      <div className="loading-icon">🎬</div>
+    <section className="loading-screen">
+      <div className="loading-orbit">
+        <div className="orbit orbit-one"></div>
+        <div className="orbit orbit-two"></div>
 
-      <h1>PopChoice</h1>
-
-      <h2>Finding your perfect movie...</h2>
-
-      <p className="loading-message">
-        We're analyzing your preferences and searching for the best match.
-      </p>
-
-      <div className="loading-spinner"></div>
-
-      <div className="loading-steps">
-        <div className="loading-step">
-          <span>✓</span>
-          <p>Analyzing your movie taste</p>
-        </div>
-
-        <div className="loading-step">
-          <span>✓</span>
-          <p>Searching the movie collection</p>
-        </div>
-
-        <div className="loading-step">
-          <span className="loading-dot">●</span>
-          <p>Creating your personalized recommendation</p>
+        <div className="loading-core">
+          <span>▶</span>
         </div>
       </div>
 
-      <p className="loading-note">This may take a few seconds...</p>
-    </div>
+      <div className="loading-brand">
+        <span>POPCHOICE</span>
+        <small>AI</small>
+      </div>
+
+      <h1>
+        Finding your
+        <span> perfect movie.</span>
+      </h1>
+
+      <p className="loading-message">
+        We're analyzing your preferences and searching for the movie that fits
+        your taste.
+      </p>
+
+      <div className="loading-progress">
+        <div className="loading-progress-bar"></div>
+      </div>
+
+      <div className="loading-steps">
+        <div className="loading-step complete">
+          <span className="step-icon">✓</span>
+
+          <div>
+            <strong>Analyzing your movie taste</strong>
+            <small>Understanding your preferences</small>
+          </div>
+
+          <span className="step-status">DONE</span>
+        </div>
+
+        <div className="loading-step complete">
+          <span className="step-icon">✓</span>
+
+          <div>
+            <strong>Searching the movie collection</strong>
+            <small>Finding your strongest matches</small>
+          </div>
+
+          <span className="step-status">DONE</span>
+        </div>
+
+        <div className="loading-step active">
+          <span className="step-icon loading-dot">✦</span>
+
+          <div>
+            <strong>Creating your recommendation</strong>
+            <small>Personalizing your movie match</small>
+          </div>
+
+          <span className="step-status">WORKING</span>
+        </div>
+      </div>
+
+      <p className="loading-note">This usually takes only a few seconds</p>
+    </section>
   );
 }
 
