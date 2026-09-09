@@ -1,15 +1,36 @@
 function LoadingState() {
   return (
-    <div>
-      <h1>🎬 PopChoice</h1>
+    <div className="loading-screen">
+      <div className="loading-icon">🎬</div>
 
-      <h2>Analyzing Your Movie Taste...</h2>
+      <h1>PopChoice</h1>
 
-      <p>🍿 Looking through thousands of movies</p>
+      <h2>Finding your perfect movie...</h2>
 
-      <p>🤖 Matching your preferences</p>
+      <p className="loading-message">
+        We're analyzing your preferences and searching for the best match.
+      </p>
 
-      <p>🎬 Selecting the perfect recommendation</p>
+      <div className="loading-spinner"></div>
+
+      <div className="loading-steps">
+        <div className="loading-step">
+          <span>✓</span>
+          <p>Analyzing your movie taste</p>
+        </div>
+
+        <div className="loading-step">
+          <span>✓</span>
+          <p>Searching the movie collection</p>
+        </div>
+
+        <div className="loading-step">
+          <span className="loading-dot">●</span>
+          <p>Creating your personalized recommendation</p>
+        </div>
+      </div>
+
+      <p className="loading-note">This may take a few seconds...</p>
     </div>
   );
 }
